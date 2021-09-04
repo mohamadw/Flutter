@@ -9,7 +9,7 @@ MyBottomNavigationBar(context) {
   var cubit  = CubitNewsLayout.get(context);
 
   return BottomNavigationBar(
-    currentIndex: cubit.current_index,
+    currentIndex: cubit.navigator_bar_index,
     onTap: (index){cubit.ChangeNavigatorBar(index);},
     items: [
       BottomNavigationBarItem(

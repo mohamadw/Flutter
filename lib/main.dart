@@ -21,7 +21,7 @@ class NewsApp extends StatelessWidget {
           color: Colors.deepOrangeAccent,
           backwardsCompatibility: false,
           iconTheme: IconThemeData(
-            color: Colors.black,
+            color: Colors.white,
           ),
           titleTextStyle: TextStyle(
             color: Colors.white,

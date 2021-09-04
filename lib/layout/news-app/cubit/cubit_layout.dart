@@ -8,10 +8,10 @@ class CubitNewsLayout extends Cubit<NewsLayoutStates> {
 
 
   ///// Navigator Bar
-  int current_index = 0;
+  int navigator_bar_index = 0;
 
   ChangeNavigatorBar(int index) {
-    current_index = index;
+    navigator_bar_index = index;
     emit(NewsNavigatorBarState());
   }
 }
