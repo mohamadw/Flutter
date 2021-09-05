@@ -3,10 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:news_app/layout/news-app/home_layout/home_layout.dart';
 import 'package:news_app/shared/bloc_observer.dart';
+import 'package:news_app/shared/network/remote/dio_helper.dart';
 
-//http://newsapi.org/v2/top-headlines?country=il&category=business&apiKey=f1a3e932f5d349e79bda9cc8f38afb0f
+//http://newsapi.org/
+// v2/top-headlines?country=il&category=business&apiKey=f1a3e932f5d349e79bda9cc8f38afb0f
 void main() {
   Bloc.observer = MyBlocObserver();
+  DioHelper.init();
   runApp(NewsApp());
 }
 
