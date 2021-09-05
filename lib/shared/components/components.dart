@@ -20,7 +20,7 @@ MyBottomNavigationBar(context) {
   );
 }
 
-Widget buildArticleItem(Map article) {
+Widget buildArticleItem(Map article,context) {
   return Padding(
     padding: const EdgeInsets.all(20.0),
     child: Row(
@@ -53,16 +53,13 @@ Widget buildArticleItem(Map article) {
              children: [
                Text(
                  '${article['title']}',
-                 style: TextStyle(
-                   fontSize: 18.0,
-                   fontWeight: FontWeight.w600,
-                 ),
+                 style: Theme.of(context).textTheme.bodyText1,
                maxLines: 3,
                    overflow:TextOverflow.ellipsis,
 
                ),
                Text(
-                 'Date',
+               '${article['publishedAt']}',
                  style: TextStyle(
                    color: Colors.grey,
                    fontSize: 15.0,
@@ -83,7 +80,7 @@ Widget buildArticlePage(list){
   return list.length> 0?
           ListView.separated(
         physics: BouncingScrollPhysics(),
-        itemBuilder:(context,index)=> buildArticleItem(list[index]),
+        itemBuilder:(context,index)=> buildArticleItem(list[index],context),
         separatorBuilder: (context,index)=> Container(
           height: 1,
           width: double.infinity,
