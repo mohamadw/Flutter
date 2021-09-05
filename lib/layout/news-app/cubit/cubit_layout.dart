@@ -1,3 +1,5 @@
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:news_app/layout/news-app/states/cubit_states_layout.dart';
 import 'package:news_app/shared/network/remote/dio_helper.dart';
@@ -15,11 +17,9 @@ class CubitNewsLayout extends Cubit<NewsLayoutStates> {
 
   ///// Navigator Bar
   int navigator_bar_index = 0;
-  List<dynamic> business = [];
-  List<dynamic> sports = [];
-  List<dynamic> science = [];
-
-
+  List<dynamic> business = [],sports = [],science = [];
+  bool isDark = false;
+  IconData modeIcon = Icons.brightness_3_sharp;
   ChangeNavigatorBar(int index) {
     navigator_bar_index = index;
     emit(NewsNavigatorBarState());
@@ -72,6 +72,18 @@ class CubitNewsLayout extends Cubit<NewsLayoutStates> {
     }).catchError((onError){
       print(onError.toString());
     });
+  }
+
+  void changeThemeMode(){
+    if(isDark){
+      isDark=false;
+      modeIcon = Icons.brightness_3_sharp;
+    }
+    else{
+      isDark=true;
+      modeIcon = Icons.brightness_6_sharp;
+    }
+    emit(ChangeThemeModeState());
   }
 
 }

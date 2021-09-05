@@ -10,37 +10,31 @@ import 'package:news_app/shared/components/components.dart';
 class HomeLayout extends StatelessWidget {
   const HomeLayout({Key? key}) : super(key: key);
 
-
   @override
   Widget build(BuildContext context) {
-
-    return BlocProvider(
-        create: (BuildContext context) {
-          return CubitNewsLayout();
-        },
-
-      child:BlocConsumer<CubitNewsLayout,NewsLayoutStates>(
-        listener:(context , state) {} ,
-        builder:(context , state){
-          var cubit  = CubitNewsLayout.get(context);
-          List<Widget> screens = [
-            Sport_Screen(),
-            BuisnessScreen(),
-            ScienceScreen(),
-          ];
-          return Scaffold(
-              appBar: AppBar(
-                title: Text('NewsApp'),
-                actions: [
-                  Icon(Icons.search),
-                ],
-              ),
-              body: screens[cubit.navigator_bar_index],
-              bottomNavigationBar:MyBottomNavigationBar(context)
-          );
-
-        } ,
-      )
+    return BlocConsumer<CubitNewsLayout, NewsLayoutStates>(
+      listener: (context, state) {},
+      builder: (context, state) {
+        var cubit = CubitNewsLayout.get(context);
+        List<Widget> screens = [
+          Sport_Screen(),
+          BuisnessScreen(),
+          ScienceScreen(),
+        ];
+        return Scaffold(
+            appBar: AppBar(
+              titleSpacing:20 ,
+              title: Text('NewsApp'),
+              actions: [
+                IconButton(onPressed: () {
+                  cubit.changeThemeMode();
+                }, icon: Icon(cubit.modeIcon)),
+                IconButton(onPressed: () {}, icon: Icon(Icons.search)),
+              ],
+            ),
+            body: screens[cubit.navigator_bar_index],
+            bottomNavigationBar: MyBottomNavigationBar(context));
+      },
     );
   }
 }
