@@ -7,7 +7,7 @@ class  GetBusinessNewsState extends NewsLayoutStates{}
 class  GetSportsNewsState extends NewsLayoutStates{}
 class  GetScienceNewsState extends NewsLayoutStates{}
 class  GetLoadingNewsState extends NewsLayoutStates{}
-class  ChangeThemeModeState extends NewsLayoutStates{}
-
+class  NewsGetSearchSuccessState extends NewsLayoutStates{}
+class  NewsGetSearchErrorState extends NewsLayoutStates{}
 
 

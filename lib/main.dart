@@ -6,25 +6,43 @@ import 'package:hexcolor/hexcolor.dart';
 import 'package:news_app/layout/news-app/cubit/cubit_layout.dart';
 import 'package:news_app/layout/news-app/home_layout/home_layout.dart';
 import 'package:news_app/layout/news-app/states/cubit_states_layout.dart';
+import 'package:news_app/shared/app_cubit/app_cubit.dart';
+import 'package:news_app/shared/app_cubit/states/app_states.dart';
 import 'package:news_app/shared/bloc_observer.dart';
+import 'package:news_app/shared/network/local/chache_helper.dart';
 import 'package:news_app/shared/network/remote/dio_helper.dart';
 
 //http://newsapi.org/
 // v2/top-headlines?country=il&category=business&apiKey=f1a3e932f5d349e79bda9cc8f38afb0f
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   Bloc.observer = MyBlocObserver();
   DioHelper.init();
-  runApp(NewsApp());
+  await CacheHelper.init();
+  bool? isDark = CacheHelper.getBoolean(key: 'isDark');
+
+  runApp(NewsApp(isDark));
 }
 
 class NewsApp extends StatelessWidget {
+  final bool? isDark;
+
+  NewsApp(this.isDark);
+
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (BuildContext context) {
-        return CubitNewsLayout();
-      },
-      child: BlocConsumer<CubitNewsLayout, NewsLayoutStates>(
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+            create: (BuildContext context) =>
+                AppCubit()..changeThemeMode(fromShared: isDark)),
+        BlocProvider(
+            create: (context) => CubitNewsLayout()
+              ..GetSportsArticles()
+              ..GetScienceArticles()
+              ..GetBusinessArticles())
+      ],
+      child: BlocConsumer<AppCubit, AppStates>(
         listener: (context, state) {},
         builder: (context, state) {
           return MaterialApp(
@@ -86,9 +104,8 @@ class NewsApp extends StatelessWidget {
               ),
               scaffoldBackgroundColor: HexColor("#121212"),
             ),
-            themeMode: CubitNewsLayout.get(context).isDark
-                ? ThemeMode.dark
-                : ThemeMode.light,
+            themeMode:
+                AppCubit.get(context).isDark ? ThemeMode.dark : ThemeMode.light,
           );
         },
       ),
