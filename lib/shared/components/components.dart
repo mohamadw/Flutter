@@ -1,6 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:news_app/layout/news-app/cubit/cubit_layout.dart';
+import 'package:news_app/models/web_view/web_vew_screen.dart';
 
 MyBottomNavigationBar(context) {
   var cubit = CubitNewsLayout.get(context);
@@ -21,58 +22,63 @@ MyBottomNavigationBar(context) {
 }
 
 Widget buildArticleItem(Map article,context) {
-  return Padding(
-    padding: const EdgeInsets.all(20.0),
-    child: Row(
-      mainAxisSize: MainAxisSize.min,
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Container(
-          height: 120,
-          width: 120,
-          decoration: BoxDecoration(
-            color: Colors.deepOrangeAccent,
-            image: DecorationImage(
-              fit:BoxFit.cover,
+  return InkWell(
+    onTap: (){
+      navigateTo(context, WebViewScreen(article['url']));
+    },
+    child: Padding(
+      padding: const EdgeInsets.all(20.0),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Container(
+            height: 120,
+            width: 120,
+            decoration: BoxDecoration(
+              color: Colors.deepOrangeAccent,
+              image: DecorationImage(
+                fit:BoxFit.cover,
 
-              image: NetworkImage(
-                article['urlToImage'] != null?
-                  article['urlToImage']: "https://cdn.pixabay.com/photo/2015/04/19/08/33/flower-729512_960_720.jpg",
+                image: NetworkImage(
+                  article['urlToImage'] != null?
+                    article['urlToImage']: "https://cdn.pixabay.com/photo/2015/04/19/08/33/flower-729512_960_720.jpg",
+                ),
               ),
+                borderRadius:BorderRadius.circular(10),
             ),
-              borderRadius:BorderRadius.circular(10),
+
           ),
+         SizedBox(width: 20),
+         Expanded(
+           child: Container(
+             child: Column(
 
-        ),
-       SizedBox(width: 20),
-       Expanded(
-         child: Container(
-           child: Column(
+               crossAxisAlignment: CrossAxisAlignment.start,
+               children: [
+                 Text(
+                   '${article['title']}',
+                   style: Theme.of(context).textTheme.bodyText1,
+                 maxLines: 3,
+                     overflow:TextOverflow.ellipsis,
 
-             crossAxisAlignment: CrossAxisAlignment.start,
-             children: [
-               Text(
-                 '${article['title']}',
-                 style: Theme.of(context).textTheme.bodyText1,
-               maxLines: 3,
+                 ),
+                 Text(
+                 '${article['publishedAt']}',
+                   style: TextStyle(
+                     color: Colors.grey,
+                     fontSize: 15.0,
+                   ),
                    overflow:TextOverflow.ellipsis,
 
-               ),
-               Text(
-               '${article['publishedAt']}',
-                 style: TextStyle(
-                   color: Colors.grey,
-                   fontSize: 15.0,
                  ),
-                 overflow:TextOverflow.ellipsis,
-
-               ),
-             ],
+               ],
+             ),
            ),
          ),
-       ),
 
-      ],
+        ],
+      ),
     ),
   );
 }

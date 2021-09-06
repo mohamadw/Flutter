@@ -5,7 +5,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:news_app/layout/news-app/cubit/cubit_layout.dart';
 import 'package:news_app/layout/news-app/home_layout/home_layout.dart';
-import 'package:news_app/layout/news-app/states/cubit_states_layout.dart';
 import 'package:news_app/shared/app_cubit/app_cubit.dart';
 import 'package:news_app/shared/app_cubit/states/app_states.dart';
 import 'package:news_app/shared/bloc_observer.dart';
@@ -103,6 +102,8 @@ class NewsApp extends StatelessWidget {
                 type: BottomNavigationBarType.fixed,
               ),
               scaffoldBackgroundColor: HexColor("#121212"),
+
+
             ),
             themeMode:
                 AppCubit.get(context).isDark ? ThemeMode.dark : ThemeMode.light,
