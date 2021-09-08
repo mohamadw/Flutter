@@ -1,4 +1,4 @@
-// import 'package:flutter/material.dart';
+ import 'package:flutter/material.dart';
 //
 // MyBottomNavigationBar(context) {
 //   var cubit = CubitNewsLayout.get(context);
@@ -95,12 +95,28 @@
 //
 //
 //
-// void navigateTo(context, widget) => Navigator.push(
-//   context,
-//   MaterialPageRoute(
-//     builder: (context) => widget,
-//   ),
-// );
+void navigateTo(context, widget) => Navigator.push(
+  context,
+  MaterialPageRoute(
+    builder: (context) => widget,
+  ),
+);
+
+
+ void navigateAndFinish(
+     context,
+     widget,
+     ) =>
+     Navigator.pushAndRemoveUntil(
+       context,
+       MaterialPageRoute(
+         builder: (context) => widget,
+       ),
+           (route)
+       {
+         return false;
+       },
+     );
 //
 //
 // Widget DefaultTextForm({

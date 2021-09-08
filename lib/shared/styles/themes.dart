@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:hexcolor/hexcolor.dart';
 
+var primary_color = HexColor('#6C63FF');
 ThemeData lightMode() => ThemeData(
       appBarTheme: AppBarTheme(
-        color: Colors.deepOrangeAccent,
+        color:HexColor('#6C63FF'),
         backwardsCompatibility: false,
         iconTheme: IconThemeData(
           color: Colors.white,
@@ -14,17 +15,22 @@ ThemeData lightMode() => ThemeData(
           fontSize: 20.0,
           fontWeight: FontWeight.bold,
         ),
+
         systemOverlayStyle: SystemUiOverlayStyle(
-          statusBarColor: Colors.deepOrangeAccent,
+          statusBarColor:primary_color,
           statusBarIconBrightness: Brightness.light,
         ),
       ),
+      primaryColor: primary_color,
       bottomNavigationBarTheme: BottomNavigationBarThemeData(
         backgroundColor: Colors.white,
-        selectedItemColor: Colors.deepOrangeAccent,
+        selectedItemColor: primary_color,
         type: BottomNavigationBarType.fixed,
       ),
       scaffoldBackgroundColor: Colors.white,
+  floatingActionButtonTheme: FloatingActionButtonThemeData(
+    backgroundColor: primary_color,
+  )
     );
 
 ThemeData damoMode() => ThemeData(
