@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:shop_app/models/boarding_model/boarding_model.dart';
+import 'package:shop_app/modules/screens/login_screen/login_screen.dart';
 import 'package:shop_app/modules/screens/on_boarding_screen/components/on_boarding_components.dart';
+import 'package:shop_app/shared/components/components.dart';
+import 'package:shop_app/shared/styles/colors/colors.dart';
 import 'package:shop_app/shared/styles/themes.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
@@ -41,7 +44,7 @@ class _onBoardingScreenState extends State<onBoardingScreen> {
         elevation: 0,
         actions: [
           TextButton(
-              onPressed: () {},
+              onPressed: () { navigateAndFinish(context, LoginScreen());},
               child: Text(
                 'SKIP',
                 style: TextStyle(color: primary_color),
@@ -90,7 +93,7 @@ class _onBoardingScreenState extends State<onBoardingScreen> {
                 FloatingActionButton(
                   onPressed: () {
                     if (is_last_page_onboarding) {
-                      print('yes last');
+                      navigateAndFinish(context, LoginScreen());
                     } else {
                       on_boarding_controller.nextPage(
                         duration: Duration(

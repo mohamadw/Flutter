@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:shop_app/shared/styles/colors/colors.dart';
 
-var primary_color = HexColor('#6C63FF');
 ThemeData lightMode() => ThemeData(
       appBarTheme: AppBarTheme(
         color:HexColor('#6C63FF'),
@@ -30,7 +30,7 @@ ThemeData lightMode() => ThemeData(
       scaffoldBackgroundColor: Colors.white,
   floatingActionButtonTheme: FloatingActionButtonThemeData(
     backgroundColor: primary_color,
-  )
+  ),
     );
 
 ThemeData damoMode() => ThemeData(

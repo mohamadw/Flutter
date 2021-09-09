@@ -1,4 +1,6 @@
  import 'package:flutter/material.dart';
+import 'package:hexcolor/hexcolor.dart';
+import 'package:shop_app/shared/styles/colors/colors.dart';
 //
 // MyBottomNavigationBar(context) {
 //   var cubit = CubitNewsLayout.get(context);
@@ -95,6 +97,34 @@
 //
 //
 //
+
+ Widget defaultButton({
+   double width = double.infinity,
+   required Color background ,
+   bool isUpperCase = true,
+   double radius = 3.0,
+   required Function() function,
+   required String text,
+ }) =>
+     Container(
+       width: width,
+       height: 50.0,
+       child: MaterialButton(
+         onPressed: function,
+         child: Text(
+           isUpperCase ? text.toUpperCase() : text,
+           style: TextStyle(
+             color: Colors.white,
+           ),
+         ),
+       ),
+       decoration: BoxDecoration(
+         borderRadius: BorderRadius.circular(
+           radius,
+         ),
+         color: background,
+       ),
+     );
 void navigateTo(context, widget) => Navigator.push(
   context,
   MaterialPageRoute(
@@ -119,32 +149,48 @@ void navigateTo(context, widget) => Navigator.push(
      );
 //
 //
-// Widget DefaultTextForm({
-//   required TextEditingController controller,
-//   required String labelText,
-//   required IconData prefixIcon,
-//   required String? Function(String?)? validate,
-//   IconData? suffixIcon,
-//   bool obscureText = false,
-//   TextInputType keyboardType = TextInputType.text,
-//   bool enabled = true,
-//   Function()?  functionOnTap ,
-//   Function(String)? functionOnSubmit,
-//   Function(String)? functionOnchange,
-// }) =>
-//     TextFormField(
-//       controller: controller,
-//       onChanged: functionOnchange,
-//       onFieldSubmitted: functionOnSubmit,
-//       onTap: functionOnTap,
-//       validator: validate,
-//       obscureText: obscureText,
-//       keyboardType: keyboardType,
-//       decoration: InputDecoration(
-//         labelText: labelText,
-//         prefixIcon: Icon(prefixIcon),
-//         suffixIcon: Icon(suffixIcon),
-//         border: OutlineInputBorder(),
-//         enabled: enabled,
-//       ),
-//     );
+Widget DefaultTextForm({
+  required TextEditingController controller,
+  required String labelText,
+  required String? Function(String?)? validate,
+  IconData? prefixIcon,
+  IconData? suffixIcon,
+  bool obscureText = false,
+  TextInputType keyboardType = TextInputType.text,
+  bool enabled = true,
+  Function()?  functionOnTap ,
+  Function(String)? functionOnSubmit,
+  Function(String)? functionOnchange,
+}) =>
+    TextFormField(
+      controller: controller,
+      onChanged: functionOnchange,
+      onFieldSubmitted: functionOnSubmit,
+      onTap: functionOnTap,
+      validator: validate,
+      obscureText: obscureText,
+      keyboardType: keyboardType,
+
+      decoration: InputDecoration(
+        labelText: labelText,
+        prefixIcon: Icon(prefixIcon),
+        suffixIcon: Icon(suffixIcon),
+        border: OutlineInputBorder(),
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(25.0),
+          borderSide: BorderSide(
+            color: secondry_color,
+            width: 2.0,
+          ),
+        ),
+
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(25.0),
+          borderSide: BorderSide(
+            color: primary_color,
+          ),
+        ),
+        enabled: enabled,
+      ),
+    );
+
